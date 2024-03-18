@@ -38,6 +38,10 @@ class ClassicSequenceState(
                     compiler.subSequences.last() += SymbolSequence(lastSubSequence)
                 }
 
+                '{' -> {
+                    compiler.state = CountedSymbolBuilderState(compiler)
+                }
+
                 '[' -> {
                     compiler.state = CharacterSetBuilderState(compiler)
                 }

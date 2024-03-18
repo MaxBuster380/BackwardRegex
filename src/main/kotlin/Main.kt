@@ -14,7 +14,7 @@ fun main() {
     val numberRegex = "-?[1-9]\\d*(\\.\\d+)?([Ee]-?\\d+)?"
 
     val compiler = Compiler()
-    val compiledRegex = compiler.generate( numberRegex )
+    val compiledRegex = compiler.generate( emailRegex )
 
     println(compiledRegex)
 

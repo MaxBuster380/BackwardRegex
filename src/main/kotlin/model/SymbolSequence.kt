@@ -12,4 +12,16 @@ class SymbolSequence(
 
         return res
     }
+
+    override fun toString(): String {
+        var res = ""
+
+        if (symbols.isNotEmpty()) {
+            for(element in symbols) {
+                res = "${res}${element}"
+            }
+        }
+
+        return res
+    }
 }

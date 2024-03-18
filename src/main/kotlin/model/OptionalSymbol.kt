@@ -12,4 +12,11 @@ class OptionalSymbol(
             ""
         }
     }
+    override fun toString(): String {
+        return if (subSymbol is StaticCharacter || subSymbol is OrGroup || subSymbol is CharacterClass) {
+            "${subSymbol}?"
+        } else {
+            "(${subSymbol})?"
+        }
+    }
 }

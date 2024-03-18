@@ -13,6 +13,7 @@ enum class CharacterClass : RegexSymbol {
             val randomIndex = abs(Random.nextInt()) % (WHITE_ALPHABET.size)
             return WHITE_ALPHABET.toList()[randomIndex].toString()
         }
+        override fun toString(): String = "\\s"
     },
 
     /**
@@ -26,6 +27,7 @@ enum class CharacterClass : RegexSymbol {
             } while (res.isWhitespace())
             return res.toString()
         }
+        override fun toString(): String = "\\S"
     },
 
     /**
@@ -36,6 +38,7 @@ enum class CharacterClass : RegexSymbol {
             val randomDigit = abs(Random.nextInt()) % 10
             return randomDigit.toString()
         }
+        override fun toString(): String = "\\d"
     },
 
     /**
@@ -49,6 +52,7 @@ enum class CharacterClass : RegexSymbol {
             } while (res.isDigit())
             return res.toString()
         }
+        override fun toString(): String = "\\D"
     },
 
     /**
@@ -59,6 +63,7 @@ enum class CharacterClass : RegexSymbol {
             val randomIndex = abs(Random.nextInt()) % (WORD_ALPHABET.size)
             return WORD_ALPHABET.toList()[randomIndex].toString()
         }
+        override fun toString(): String = "\\w"
     },
 
     /**
@@ -72,6 +77,7 @@ enum class CharacterClass : RegexSymbol {
             } while (WORD_ALPHABET.contains(res))
             return res.toString()
         }
+        override fun toString(): String = "\\W"
     },
 
     /**
@@ -81,6 +87,7 @@ enum class CharacterClass : RegexSymbol {
         override fun generateMatchingText(): String {
             return randomChar().toString()
         }
+        override fun toString(): String = "\\."
     };
 
     companion object {

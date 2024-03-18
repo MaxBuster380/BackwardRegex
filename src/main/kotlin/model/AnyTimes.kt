@@ -1,0 +1,23 @@
+package org.example.model
+
+import kotlin.math.abs
+import kotlin.random.Random
+
+/**
+ * # a*
+ */
+class AnyTimes(
+    private val subSymbol : RegexSymbol
+) : RegexSymbol {
+    override fun generateMatchingText(): String {
+        var res = ""
+
+        val times = abs(Random.nextInt()) % (RegexSymbol.MAXIMUM_ARBITRARY_SIZE)
+
+        for(i in 1..times) {
+            res = "${res}${subSymbol.generateMatchingText()}"
+        }
+
+        return res
+    }
+}

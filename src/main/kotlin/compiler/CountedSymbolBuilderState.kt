@@ -5,7 +5,8 @@ import org.example.model.RegexSymbol
 import org.example.model.UnboundedCountedSymbol
 
 class CountedSymbolBuilderState(
-    private val compiler: Compiler
+    private val compiler: Compiler,
+    private val previousState : CompilerState
 ) : CompilerState {
 
     private var minimum : Int? = null
@@ -16,7 +17,7 @@ class CountedSymbolBuilderState(
     override fun useCharacter(char: Char, symbols: MutableList<RegexSymbol>) {
         if (char == '}') {
             compile(symbols)
-            compiler.state = ClassicSequenceState(compiler)
+            compiler.state = previousState
             return
         }
 

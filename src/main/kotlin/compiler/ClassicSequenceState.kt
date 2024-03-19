@@ -37,9 +37,9 @@ class ClassicSequenceState(
                 }
 
                 ')' -> {
+                    val size = compiler.subSequences.size
                     val lastSubSequences = compiler.subSequences.subList(
-                        compiler.subSequences.size - orPossibilities,
-                        compiler.subSequences.size
+                        size - orPossibilities, size
                     ).toList()
                     compiler.subSequences.removeAll(lastSubSequences)
 
@@ -52,7 +52,7 @@ class ClassicSequenceState(
                 }
 
                 '{' -> {
-                    compiler.state = CountedSymbolBuilderState(compiler)
+                    compiler.state = CountedSymbolBuilderState(compiler, this)
                 }
 
                 '[' -> {

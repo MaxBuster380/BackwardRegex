@@ -7,7 +7,7 @@ class Compiler {
     val subSequences = mutableListOf<MutableList<RegexSymbol>>()
     lateinit var state : CompilerState
 
-    fun generate(regex : String) : RegexSymbol {
+    fun generate(regex : Regex) : RegexSymbol {
         val res = mutableListOf<RegexSymbol>()
 
         state = ClassicSequenceState(this)
@@ -15,7 +15,7 @@ class Compiler {
         subSequences.clear()
         subSequences += res
 
-        for(char in regex) {
+        for(char in regex.toString()) {
             state.useCharacter(char, subSequences.last())
         }
 

@@ -7,7 +7,7 @@ import kotlin.random.Random
  * # \[abc]
  */
 class CharacterRandomSet(
-    val characters : Set<Char>
+    private val characters : Set<Char>
 ) : CharacterSet {
     override fun generateMatchingText(): String {
         val randomIndex = abs(Random.nextInt()) % (characters.size)

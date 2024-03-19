@@ -15,7 +15,7 @@ class CharacterRange(
 
         if (secondCode < firstCode) return ""
 
-        val generatedCode = abs(Random.nextInt()) % (secondCode - firstCode) + firstCode
+        val generatedCode = abs(Random.nextInt()) % (secondCode - firstCode + 1) + firstCode
 
         return generatedCode.toChar().toString()
     }

@@ -45,10 +45,14 @@ class CountedSymbolBuilderState(
     private fun compile(symbols: MutableList<RegexSymbol>) {
         val countedSymbol = symbols.removeLast()
 
-        if (maximum == null) {
-            symbols += UnboundedCountedSymbol(countedSymbol, minimum!!)
+        if (finishedMinimum) {
+            if (maximum == null) {
+                symbols += UnboundedCountedSymbol(countedSymbol, minimum!!)
+            } else {
+                symbols += CountedSymbol(countedSymbol, minimum!!, maximum!!)
+            }
         } else {
-            symbols += CountedSymbol(countedSymbol, minimum!!, maximum!!)
+            symbols += CountedSymbol(countedSymbol, minimum!!, minimum!!)
         }
     }
 }

@@ -3,7 +3,8 @@ package org.example.compiler
 import org.example.model.*
 
 class CharacterSetBuilderState(
-    private val compiler : Compiler
+    private val compiler : Compiler,
+    private val previousState : CompilerState
 ) : CompilerState {
 
     private var symbolsCreated = 0
@@ -15,7 +16,7 @@ class CharacterSetBuilderState(
 
         if (char == ']') {
             compile(symbols)
-            compiler.state = ClassicSequenceState(compiler)
+            compiler.state = previousState
             return
         }
 

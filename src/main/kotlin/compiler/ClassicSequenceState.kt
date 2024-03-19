@@ -7,8 +7,10 @@ class ClassicSequenceState(
 ) : CompilerState {
 
     companion object {
-        val RESERVED_CHARACTERS = "*+?^$[]()\\.{}".toSet()
+        val RESERVED_CHARACTERS = "*+?^$[]()\\.{}|".toSet()
     }
+
+    private var orPossibilities = 0
 
     override fun useCharacter(char: Char, symbols: MutableList<RegexSymbol>) {
 
@@ -30,12 +32,23 @@ class ClassicSequenceState(
                 }
 
                 '(' -> {
+                    orPossibilities = 1
                     compiler.subSequences += mutableListOf<RegexSymbol>()
                 }
 
                 ')' -> {
-                    val lastSubSequence = compiler.subSequences.removeLast()
-                    compiler.subSequences.last() += SymbolSequence(lastSubSequence)
+                    val lastSubSequences = compiler.subSequences.subList(
+                        compiler.subSequences.size - orPossibilities,
+                        compiler.subSequences.size
+                    ).toList()
+                    compiler.subSequences.removeAll(lastSubSequences)
+
+                    compiler.subSequences.last() += OrGroup(lastSubSequences.map{SymbolSequence(it)})
+                }
+
+                '|' -> {
+                    orPossibilities += 1
+                    compiler.subSequences += mutableListOf<RegexSymbol>()
                 }
 
                 '{' -> {
@@ -43,7 +56,7 @@ class ClassicSequenceState(
                 }
 
                 '[' -> {
-                    compiler.state = CharacterSetBuilderState(compiler)
+                    compiler.state = CharacterSetBuilderState(compiler, this)
                 }
 
                 '\\' -> {

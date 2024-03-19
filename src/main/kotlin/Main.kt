@@ -11,10 +11,14 @@ fun main() {
 
     val wordRegex = "[\\w\\-]"
 
+
+
     val numberRegex = "-?[1-9]\\d*(\\.\\d+)?([Ee]-?\\d+)?"
 
+    val multipleOfFourRegex = "([048]|\\d*[02468][048]|\\d*[13579][26])"
+
     val compiler = Compiler()
-    val compiledRegex = compiler.generate( emailRegex )
+    val compiledRegex = compiler.generate( multipleOfFourRegex )
 
     println(compiledRegex)
 

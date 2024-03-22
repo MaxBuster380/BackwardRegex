@@ -1,10 +1,9 @@
 package org.example.model
 
 import kotlin.math.abs
-import kotlin.math.min
 import kotlin.random.Random
 
-class CountedSymbol(
+internal class CountedSymbol(
     private val subSymbol: RegexSymbol,
     private val minimum : Int,
     private val maximum : Int

@@ -3,7 +3,7 @@ package org.example.model
 import kotlin.math.abs
 import kotlin.random.Random
 
-class CollectionCharacterSet(
+internal class CollectionCharacterSet(
     private val subSets: List<CharacterSet>
 ) : CharacterSet {
     override fun generateMatchingText(): String {

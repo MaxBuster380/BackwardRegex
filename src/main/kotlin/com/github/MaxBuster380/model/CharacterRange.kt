@@ -6,7 +6,7 @@ import kotlin.random.Random
 /**
  * # \[A-Z]
  */
-class CharacterRange(
+internal class CharacterRange(
     private val first : Char,
     private val second : Char
 ) : CharacterSet {

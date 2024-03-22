@@ -1,6 +1,6 @@
 package org.example.model
 
-class SymbolSequence(
+internal class SymbolSequence(
     private val symbols : List<RegexSymbol>
 ) : RegexSymbol {
     override fun generateMatchingText(): String {

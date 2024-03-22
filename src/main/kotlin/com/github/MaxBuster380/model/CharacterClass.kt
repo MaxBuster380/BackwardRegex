@@ -3,7 +3,7 @@ package org.example.model
 import kotlin.math.abs
 import kotlin.random.Random
 
-enum class CharacterClass : CharacterSet {
+internal enum class CharacterClass : CharacterSet {
 
     /**
      * # \s

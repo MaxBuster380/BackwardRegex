@@ -3,7 +3,7 @@ package org.example.model
 import kotlin.math.abs
 import kotlin.random.Random
 
-class UnboundedCountedSymbol(
+internal class UnboundedCountedSymbol(
     private val subSymbol: RegexSymbol,
     private val minimum : Int
 ) : RegexSymbol {

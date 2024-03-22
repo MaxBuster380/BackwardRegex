@@ -6,7 +6,7 @@ import kotlin.random.Random
 /**
  * # (a|b|c)
  */
-class OrGroup(
+internal class OrGroup(
     private val symbols : List<RegexSymbol>
 ) : RegexSymbol {
     override fun generateMatchingText(): String {

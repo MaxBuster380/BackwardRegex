@@ -1,7 +1,7 @@
-package org.example.compiler
+package com.github.MaxBuster380.compiler
 
 import org.example.model.RegexSymbol
 
-interface CompilerState {
+internal interface CompilerState {
     fun useCharacter(char : Char, symbols : MutableList<RegexSymbol>)
 }

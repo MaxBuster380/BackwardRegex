@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="CompilerTest" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
-    <module name="BackwardsRegex" />
+  <configuration default="false" name="BackwardRegexCompilerTest" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+    <module name="BackwardRegex" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="compiler.*" />
@@ -8,7 +8,7 @@
       </pattern>
     </extension>
     <option name="PACKAGE_NAME" value="compiler" />
-    <option name="MAIN_CLASS_NAME" value="compiler.CompilerTest" />
+    <option name="MAIN_CLASS_NAME" value="compiler.BackwardRegexCompilerTest" />
     <option name="METHOD_NAME" value="" />
     <option name="TEST_OBJECT" value="class" />
     <method v="2">

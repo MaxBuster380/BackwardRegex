@@ -6,7 +6,7 @@ import kotlin.random.Random
 /**
  * # a*
  */
-class AnyTimes(
+internal class AnyTimes(
     private val subSymbol : RegexSymbol
 ) : RegexSymbol {
     override fun generateMatchingText(): String {

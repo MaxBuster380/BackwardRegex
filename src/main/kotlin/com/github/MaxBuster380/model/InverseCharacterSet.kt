@@ -2,7 +2,10 @@ package org.example.model
 
 import kotlin.random.Random
 
-class InverseCharacterSet(
+/**
+ * # \[^ABC]
+ */
+internal class InverseCharacterSet(
     private val subSet: CharacterSet
 ) : CharacterSet {
     override fun generateMatchingText(): String {

@@ -1,10 +1,10 @@
 package compiler
 
-import org.example.compiler.Compiler
+import org.example.compiler.BackwardRegexCompiler
 import kotlin.test.Test
 import kotlin.test.assertTrue
 
-class CompilerTest {
+class BackwardRegexCompilerTest {
 
     private val sampleRegex = listOf(
         """^[\w\-]+(\.[\w\-]+)*@([\w\-]+\.)+[\w\-]{2,4}${'$'}""".toRegex(),
@@ -23,10 +23,10 @@ class CompilerTest {
     @Test
     fun checkAllRegex() {
 
-        val compiler = Compiler()
+        val backwardRegexCompiler = BackwardRegexCompiler()
         for (regex in sampleRegex) {
             try {
-                val compiledRegex = compiler.generate(regex)
+                val compiledRegex = backwardRegexCompiler.generate(regex)
 
                 for (i in 1..100) {
                     val generatedText = compiledRegex.generateMatchingText()

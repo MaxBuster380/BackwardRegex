@@ -5,7 +5,7 @@ import org.example.compiler.ClassicSequenceState
 /**
  * Any sequence of characters that can only be that value.
  */
-class StaticCharacter(
+internal class StaticCharacter(
     val char : Char
 ) : RegexSymbol, CharacterSet {
     override fun generateMatchingText(): String {

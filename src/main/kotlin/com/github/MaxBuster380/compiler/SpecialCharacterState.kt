@@ -24,9 +24,9 @@
  * SOFTWARE.
  */
 
-package org.example.compiler
+package com.github.MaxBuster380.compiler
 
-import com.github.MaxBuster380.compiler.CompilerState
+import com.github.MaxBuster380.model.GroupReference
 import org.example.model.CharacterClass
 import org.example.model.RegexSymbol
 import org.example.model.StaticCharacter
@@ -36,6 +36,17 @@ internal class SpecialCharacterState(
     private val previousState : CompilerState
 ) : CompilerState {
     override fun useCharacter(char: Char, symbols: MutableList<RegexSymbol>) {
+        if (char.isDigit()) {
+
+            if (compiler.groupsCreated < char.digitToInt()) {
+                throw UnmatchingRegexException()
+            }
+
+            symbols += GroupReference(char.digitToInt())
+            compiler.state = previousState
+            return
+        }
+
         when (char) {
             'n' -> symbols += StaticCharacter('\n')
             't' -> symbols += StaticCharacter('\t')

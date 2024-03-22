@@ -1,13 +1,15 @@
 package org.example.model
 
+import com.github.MaxBuster380.compiler.GroupsTallier
+
 internal class SymbolSequence(
     private val symbols : List<RegexSymbol>
 ) : RegexSymbol {
-    override fun generateMatchingText(): String {
+    override fun generateMatchingText(groups: GroupsTallier): String {
         var res = ""
 
         for(symbol in symbols) {
-            res = "${res}${symbol.generateMatchingText()}"
+            res = "${res}${symbol.generateMatchingText(groups)}"
         }
 
         return res

@@ -1,5 +1,6 @@
 package org.example.model
 
+import com.github.MaxBuster380.compiler.GroupsTallier
 import kotlin.math.abs
 import kotlin.random.Random
 
@@ -9,7 +10,7 @@ internal enum class CharacterClass : CharacterSet {
      * # \s
      */
     WHITE_SPACE {
-        override fun generateMatchingText(): String {
+        override fun generateMatchingText(groups: GroupsTallier): String {
             val randomIndex = abs(Random.nextInt()) % (WHITE_ALPHABET.size)
             return WHITE_ALPHABET.toList()[randomIndex].toString()
         }
@@ -23,7 +24,7 @@ internal enum class CharacterClass : CharacterSet {
      * # \S
      */
     NOT_WHITE_SPACE {
-        override fun generateMatchingText(): String {
+        override fun generateMatchingText(groups: GroupsTallier): String {
             var res : Char
             do {
                 res = randomChar()
@@ -38,7 +39,7 @@ internal enum class CharacterClass : CharacterSet {
      * # \d
      */
     DIGIT {
-        override fun generateMatchingText(): String {
+        override fun generateMatchingText(groups: GroupsTallier): String {
             val randomDigit = abs(Random.nextInt()) % 10
             return randomDigit.toString()
         }
@@ -50,7 +51,7 @@ internal enum class CharacterClass : CharacterSet {
      * # \D
      */
     NOT_DIGIT {
-        override fun generateMatchingText(): String {
+        override fun generateMatchingText(groups: GroupsTallier): String {
             var res : Char
             do {
                 res = randomChar()
@@ -65,7 +66,7 @@ internal enum class CharacterClass : CharacterSet {
      * # \w
      */
     WORD {
-        override fun generateMatchingText(): String {
+        override fun generateMatchingText(groups: GroupsTallier): String {
             val randomIndex = abs(Random.nextInt()) % (WORD_ALPHABET.size)
             return WORD_ALPHABET.toList()[randomIndex].toString()
         }
@@ -77,7 +78,7 @@ internal enum class CharacterClass : CharacterSet {
      * # \W
      */
     NOT_WORD {
-        override fun generateMatchingText(): String {
+        override fun generateMatchingText(groups: GroupsTallier): String {
             var res : Char
             do {
                 res = randomChar()
@@ -92,7 +93,7 @@ internal enum class CharacterClass : CharacterSet {
      * # .
      */
     ANY {
-        override fun generateMatchingText(): String {
+        override fun generateMatchingText(groups: GroupsTallier): String {
             return randomChar().toString()
         }
 

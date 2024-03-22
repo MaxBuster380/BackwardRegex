@@ -1,5 +1,6 @@
 package org.example.model
 
+import com.github.MaxBuster380.compiler.GroupsTallier
 import kotlin.math.abs
 import kotlin.random.Random
 
@@ -8,13 +9,13 @@ internal class CountedSymbol(
     private val minimum : Int,
     private val maximum : Int
 ) : RegexSymbol {
-    override fun generateMatchingText(): String {
+    override fun generateMatchingText(groups: GroupsTallier): String {
 
         var res = ""
 
         if (maximum == minimum) {
             for(i in 1..maximum) {
-                res = "${res}${subSymbol.generateMatchingText()}"
+                res = "${res}${subSymbol.generateMatchingText(groups)}"
             }
             return res
         }
@@ -22,7 +23,7 @@ internal class CountedSymbol(
         val times = abs(Random.nextInt()) % (maximum - minimum + 1) + minimum
 
         for(i in 1..times) {
-            res = "${res}${subSymbol.generateMatchingText()}"
+            res = "${res}${subSymbol.generateMatchingText(groups)}"
         }
 
         return res

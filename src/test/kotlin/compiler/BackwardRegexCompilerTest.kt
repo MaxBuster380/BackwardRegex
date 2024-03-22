@@ -1,7 +1,35 @@
+/*
+ * MIT License
+ *
+ * Copyright (c) 2024 MaxBuster380
+ *
+ * This is the "BackwardRegexCompilerTest.kt" file from the BackwardRegex project.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 package compiler
 
-import org.example.compiler.BackwardRegexCompiler
+import com.github.MaxBuster380.compiler.BackwardRegexCompiler
+import com.github.MaxBuster380.model.NoMatchSymbol
 import kotlin.test.Test
+import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
 class BackwardRegexCompilerTest {
@@ -23,7 +51,9 @@ class BackwardRegexCompilerTest {
         """[-0]""".toRegex(),
         """(a|)""".toRegex(),
         """(a|||)""".toRegex(),
-        """(||||a|||)""".toRegex()
+        """(||||a|||)""".toRegex(),
+        """(\d\w)\1""".toRegex(),
+        """\1(\d\w)""".toRegex()
     )
 
     @Test
@@ -34,8 +64,12 @@ class BackwardRegexCompilerTest {
             try {
                 val compiledRegex = backwardRegexCompiler.generate(regex)
 
+                if (compiledRegex.regexSymbol is NoMatchSymbol) continue
+
                 for (i in 1..100) {
                     val generatedText = compiledRegex.generateMatchingText()
+
+                    assertNotNull(generatedText)
                     assertTrue(regex.matches(generatedText), "Failed on \"$regex\" with \"$generatedText\"")
                 }
             } catch (e: Exception) {

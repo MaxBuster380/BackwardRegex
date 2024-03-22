@@ -24,9 +24,8 @@
  * SOFTWARE.
  */
 
-package org.example.compiler
+package com.github.MaxBuster380.compiler
 
-import com.github.MaxBuster380.compiler.CompilerState
 import org.example.model.CountedSymbol
 import org.example.model.RegexSymbol
 import org.example.model.UnboundedCountedSymbol

@@ -24,9 +24,8 @@
  * SOFTWARE.
  */
 
-package org.example.compiler
+package com.github.MaxBuster380.compiler
 
-import com.github.MaxBuster380.compiler.CompilerState
 import org.example.model.*
 
 internal class CharacterSetBuilderState(

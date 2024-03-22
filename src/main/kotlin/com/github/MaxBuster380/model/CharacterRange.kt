@@ -1,5 +1,6 @@
 package org.example.model
 
+import com.github.MaxBuster380.compiler.GroupsTallier
 import kotlin.math.abs
 import kotlin.random.Random
 
@@ -11,7 +12,7 @@ internal class CharacterRange(
     private val second : Char
 ) : CharacterSet {
 
-    override fun generateMatchingText(): String {
+    override fun generateMatchingText(groups: GroupsTallier): String {
 
         val firstCode = first.code
         val secondCode = second.code

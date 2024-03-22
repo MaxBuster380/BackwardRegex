@@ -1,5 +1,6 @@
 package org.example.model
 
+import com.github.MaxBuster380.compiler.GroupsTallier
 import kotlin.random.Random
 
 /**
@@ -8,7 +9,7 @@ import kotlin.random.Random
 internal class InverseCharacterSet(
     private val subSet: CharacterSet
 ) : CharacterSet {
-    override fun generateMatchingText(): String {
+    override fun generateMatchingText(groups: GroupsTallier): String {
         var res: Char
         do {
             res = randomChar()

@@ -3,7 +3,7 @@
  *
  * Copyright (c) 2024 MaxBuster380
  *
- * This is the "OptionalSymbol.kt" file from the BackwardRegex project.
+ * This is the "GroupReference.kt" file from the BackwardRegex project.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,26 +24,16 @@
  * SOFTWARE.
  */
 
-package org.example.model
+package com.github.MaxBuster380.model
 
 import com.github.MaxBuster380.compiler.GroupsTallier
-import kotlin.random.Random
+import org.example.model.RegexSymbol
 
-internal class OptionalSymbol(
-    private val subSymbol : RegexSymbol
+internal class GroupReference(
+    private val index: Int
 ) : RegexSymbol {
-    override fun generateMatchingText(groups: GroupsTallier): String? {
-        return if (Random.nextBoolean()) {
-            subSymbol.generateMatchingText(groups)
-        } else {
-            ""
-        }
+    override fun generateMatchingText(groups: GroupsTallier): String {
+        return groups[index]
     }
-    override fun toString(): String {
-        return if (subSymbol is StaticCharacter || subSymbol is OrGroup || subSymbol is CharacterClass) {
-            "${subSymbol}?"
-        } else {
-            "(${subSymbol})?"
-        }
-    }
+
 }

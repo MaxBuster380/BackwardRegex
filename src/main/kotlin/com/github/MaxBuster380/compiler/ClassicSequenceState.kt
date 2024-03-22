@@ -24,9 +24,8 @@
  * SOFTWARE.
  */
 
-package org.example.compiler
+package com.github.MaxBuster380.compiler
 
-import com.github.MaxBuster380.compiler.CompilerState
 import org.example.model.*
 
 internal class ClassicSequenceState(
@@ -61,6 +60,7 @@ internal class ClassicSequenceState(
 
                 '(' -> {
                     compiler.subSequences += mutableListOf<RegexSymbol>()
+                    compiler.groupsCreated++
                     compiler.state = ClassicSequenceState(compiler, this)
                 }
 

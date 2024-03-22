@@ -24,9 +24,9 @@
  * SOFTWARE.
  */
 
-package org.example.compiler
+package com.github.MaxBuster380.compiler
 
-import com.github.MaxBuster380.compiler.CompilerState
+import com.github.MaxBuster380.model.NoMatchSymbol
 import org.example.model.RegexSymbol
 import org.example.model.SymbolSequence
 
@@ -34,10 +34,12 @@ class BackwardRegexCompiler {
 
     internal val subSequences = mutableListOf<MutableList<RegexSymbol>>()
     internal lateinit var state: CompilerState
+    internal var groupsCreated = 0
 
-    fun generate(regex : Regex) : RegexSymbol {
+    fun generate(regex: Regex): CompiledBackwardRegex {
         //println("Compiling regex $regex")
         val res = mutableListOf<RegexSymbol>()
+        groupsCreated = 0
 
         state = ClassicSequenceState(this, null)
 
@@ -45,10 +47,14 @@ class BackwardRegexCompiler {
         subSequences += res
 
         for(char in regex.toString()) {
-            state.useCharacter(char, subSequences.last())
-            //println("$char : $subSequences")
+            try {
+                state.useCharacter(char, subSequences.last())
+                //println("$char : $subSequences")
+            } catch (_: UnmatchingRegexException) {
+                return CompiledBackwardRegex(NoMatchSymbol())
+            }
         }
 
-        return SymbolSequence(res)
+        return CompiledBackwardRegex(SymbolSequence(res))
     }
 }

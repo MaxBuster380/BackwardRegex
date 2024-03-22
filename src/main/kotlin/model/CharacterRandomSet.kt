@@ -14,5 +14,7 @@ class CharacterRandomSet(
         return characters.toList()[randomIndex].toString()
     }
 
+    override fun contains(char: Char): Boolean = characters.contains(char)
+
     override fun toString(): String = characters.toString()
 }

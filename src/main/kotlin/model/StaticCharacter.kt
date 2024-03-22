@@ -7,10 +7,12 @@ import org.example.compiler.ClassicSequenceState
  */
 class StaticCharacter(
     val char : Char
-) : RegexSymbol {
+) : RegexSymbol, CharacterSet {
     override fun generateMatchingText(): String {
         return char.toString()
     }
+
+    override fun contains(char: Char): Boolean = this.char == char
 
     override fun toString(): String {
         return if (char in ClassicSequenceState.RESERVED_CHARACTERS) {

@@ -7,10 +7,10 @@ class CharacterSetBuilderState(
     private val previousState : CompilerState
 ) : CompilerState {
 
-    private var symbolsCreated = 0
-
     private var rangeBuilt = false
     private var rangeFirstChar : Char? = null
+    private var inverse = false
+    private var symbolsCreated = 0
 
     override fun useCharacter(char: Char, symbols: MutableList<RegexSymbol>) {
 
@@ -21,12 +21,12 @@ class CharacterSetBuilderState(
         }
 
         if (char == '\\') {
-            symbolsCreated += 1
             compiler.state = SpecialCharacterState(compiler, this)
+            symbolsCreated += 1
             return
         }
 
-        if (char == '-' && !rangeBuilt && symbols.isNotEmpty() && symbols.last() is StaticCharacter && symbolsCreated > 0) {
+        if (char == '-' && !rangeBuilt && symbols.isNotEmpty() && (symbols.last() is StaticCharacter)) {
             rangeFirstChar = (symbols.removeLast() as StaticCharacter).char
             symbolsCreated -= 1
             rangeBuilt = true
@@ -40,6 +40,11 @@ class CharacterSetBuilderState(
             return
         }
 
+        if (symbolsCreated == 0 && char == '^') {
+            inverse = true
+            return
+        }
+
         symbols += StaticCharacter(char)
         symbolsCreated += 1
     }
@@ -50,7 +55,13 @@ class CharacterSetBuilderState(
 
         symbols.removeAll(list)
 
-        symbols += OrGroup(list)
+        val collection = CollectionCharacterSet(list as List<CharacterSet>)
+
+        symbols += if (!inverse) {
+            collection
+        } else {
+            InverseCharacterSet(collection)
+        }
     }
 
 }

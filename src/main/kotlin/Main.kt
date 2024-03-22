@@ -6,10 +6,10 @@ fun main() {
 
     //val passwordRegex = """(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){8,16}""".toRegex()
 
-    val shortDoubleRegex = """^(-?\d+\.\d{1,3})\d*$""".toRegex()
+    val testedRegex = """[^\\]+\\*${'$'}""".toRegex()
 
     val compiler = Compiler()
-    val compiledRegex = compiler.generate( shortDoubleRegex )
+    val compiledRegex = compiler.generate(testedRegex)
 
     println( compiledRegex )
 

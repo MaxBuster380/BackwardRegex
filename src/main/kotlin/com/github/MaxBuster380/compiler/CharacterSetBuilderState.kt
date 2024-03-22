@@ -78,6 +78,13 @@ internal class CharacterSetBuilderState(
 
     private fun compile(symbols: MutableList<RegexSymbol>) {
 
+        if (rangeBuilt) {
+            symbols += StaticCharacter(rangeFirstChar!!)
+            symbols += StaticCharacter('-')
+            symbolsCreated += 2
+        }
+
+
         val list = symbols.subList(symbols.size - symbolsCreated, symbols.size).toList()
 
         //println("COMPILING SET : $list")

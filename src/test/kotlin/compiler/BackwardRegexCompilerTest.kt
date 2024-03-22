@@ -18,7 +18,9 @@ class BackwardRegexCompilerTest {
         """^\(*\d{3}\)*( |-)*\d{3}( |-)*\d{4}$""".toRegex(),
         """[^\w0]""".toRegex(),
         """^\+?(\d[\d\-. ]+)?(\([\d\-. ]+\))?[\d\-. ]+\d$""".toRegex(),
-        """^(0\d{9}|(0\d( (\d\d)){4})|\+\d{11})$""".toRegex()
+        """^(0\d{9}|(0\d( (\d\d)){4})|\+\d{11})$""".toRegex(),
+        """[0-]""".toRegex(),
+        """[-0]""".toRegex()
     )
 
     @Test

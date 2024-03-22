@@ -30,14 +30,15 @@ import com.github.MaxBuster380.compiler.CompilerState
 import org.example.model.*
 
 internal class ClassicSequenceState(
-    private val compiler: BackwardRegexCompiler
+    private val compiler: BackwardRegexCompiler,
+    private val previousState: CompilerState?
 ) : CompilerState {
 
     companion object {
         val RESERVED_CHARACTERS = "*+?^$[]()\\.{}|-".toSet()
     }
 
-    private var orPossibilities = 0
+    private var orPossibilities = 1
 
     override fun useCharacter(char: Char, symbols: MutableList<RegexSymbol>) {
 
@@ -59,8 +60,8 @@ internal class ClassicSequenceState(
                 }
 
                 '(' -> {
-                    orPossibilities = 1
                     compiler.subSequences += mutableListOf<RegexSymbol>()
+                    compiler.state = ClassicSequenceState(compiler, this)
                 }
 
                 ')' -> {
@@ -71,6 +72,7 @@ internal class ClassicSequenceState(
                     compiler.subSequences.removeAll(lastSubSequences)
 
                     compiler.subSequences.last() += OrGroup(lastSubSequences.map{SymbolSequence(it)})
+                    compiler.state = previousState!!
                 }
 
                 '|' -> {

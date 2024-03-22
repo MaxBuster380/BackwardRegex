@@ -66,10 +66,13 @@ internal class ClassicSequenceState(
 
                 ')' -> {
                     val size = compiler.subSequences.size
+
                     val lastSubSequences = compiler.subSequences.subList(
                         size - orPossibilities, size
                     ).toList()
-                    compiler.subSequences.removeAll(lastSubSequences)
+
+                    for (i in lastSubSequences.indices)
+                        compiler.subSequences.removeLast()
 
                     compiler.subSequences.last() += OrGroup(lastSubSequences.map{SymbolSequence(it)})
                     compiler.state = previousState!!

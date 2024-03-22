@@ -20,7 +20,10 @@ class BackwardRegexCompilerTest {
         """^\+?(\d[\d\-. ]+)?(\([\d\-. ]+\))?[\d\-. ]+\d$""".toRegex(),
         """^(0\d{9}|(0\d( (\d\d)){4})|\+\d{11})$""".toRegex(),
         """[0-]""".toRegex(),
-        """[-0]""".toRegex()
+        """[-0]""".toRegex(),
+        """(a|)""".toRegex(),
+        """(a|||)""".toRegex(),
+        """(||||a|||)""".toRegex()
     )
 
     @Test

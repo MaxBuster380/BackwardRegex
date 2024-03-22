@@ -53,7 +53,10 @@ class CharacterSetBuilderState(
 
         val list = symbols.subList(symbols.size - symbolsCreated, symbols.size).toList()
 
-        symbols.removeAll(list)
+        //println("COMPILING SET : $list")
+
+        for (i in list.indices)
+            symbols.removeLast()
 
         val collection = CollectionCharacterSet(list as List<CharacterSet>)
 

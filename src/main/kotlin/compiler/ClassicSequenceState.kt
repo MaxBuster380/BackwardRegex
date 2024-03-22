@@ -7,7 +7,7 @@ class ClassicSequenceState(
 ) : CompilerState {
 
     companion object {
-        val RESERVED_CHARACTERS = "*+?^$[]()\\.{}|".toSet()
+        val RESERVED_CHARACTERS = "*+?^$[]()\\.{}|-".toSet()
     }
 
     private var orPossibilities = 0
@@ -65,6 +65,10 @@ class ClassicSequenceState(
 
                 '.' -> {
                     compiler.subSequences.last() += CharacterClass.ANY
+                }
+
+                '-' -> {
+                    symbols += StaticCharacter('-')
                 }
 
                 else -> {}

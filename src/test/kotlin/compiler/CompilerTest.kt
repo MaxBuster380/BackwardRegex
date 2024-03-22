@@ -16,18 +16,24 @@ class CompilerTest {
         """^\d{4}-[01]\d-([012]\d|3[01])T([01]\d|2[0-3]):[0-5]\d:[0-5]\d(,\d+)?Z$""".toRegex(),
         """^(-?\d+\.\d{1,3})\d*$""".toRegex(),
         """^\(*\d{3}\)*( |-)*\d{3}( |-)*\d{4}$""".toRegex(),
-        """[^\w0]""".toRegex()
+        """[^\w0]""".toRegex(),
+        """^\+?(\d[\d\-. ]+)?(\([\d\-. ]+\))?[\d\-. ]+\d$""".toRegex()
     )
 
     @Test
     fun checkAllRegex() {
-        val compiler = Compiler()
-        for( regex in sampleRegex ) {
-            val compiledRegex = compiler.generate( regex )
 
-            for( i in 1..100 ) {
-                val generatedText = compiledRegex.generateMatchingText()
-                assertTrue(regex.matches(generatedText), "Failed on \"$regex\" with \"$generatedText\"")
+        val compiler = Compiler()
+        for (regex in sampleRegex) {
+            try {
+                val compiledRegex = compiler.generate(regex)
+
+                for (i in 1..100) {
+                    val generatedText = compiledRegex.generateMatchingText()
+                    assertTrue(regex.matches(generatedText), "Failed on \"$regex\" with \"$generatedText\"")
+                }
+            } catch (e: Exception) {
+                throw Exception("Failed compiling \"$regex\" with error $e")
             }
         }
     }

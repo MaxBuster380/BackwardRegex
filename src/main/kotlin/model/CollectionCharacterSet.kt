@@ -22,6 +22,14 @@ class CollectionCharacterSet(
     }
 
     override fun toString(): String {
-        return super.toString()
+        var res = "["
+
+        for (subSet in subSets) {
+            res = "$res$subSet"
+        }
+
+        res = "$res]"
+
+        return res
     }
 }

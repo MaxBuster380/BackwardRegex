@@ -36,7 +36,7 @@ class BackwardRegexCompiler {
     internal lateinit var state: CompilerState
 
     fun generate(regex : Regex) : RegexSymbol {
-        println("Compiling regex $regex")
+        //println("Compiling regex $regex")
         val res = mutableListOf<RegexSymbol>()
 
         state = ClassicSequenceState(this, null)
@@ -46,7 +46,7 @@ class BackwardRegexCompiler {
 
         for(char in regex.toString()) {
             state.useCharacter(char, subSequences.last())
-            println("$char : $subSequences")
+            //println("$char : $subSequences")
         }
 
         return SymbolSequence(res)
